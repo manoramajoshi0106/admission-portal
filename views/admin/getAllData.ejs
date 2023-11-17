@@ -1,0 +1,103 @@
+
+<style>
+ .navbar {
+    background-color: #0005;
+    height: 100px;
+  }
+
+  .navbar-nav li {
+    padding: 0 10px;
+  }
+
+  .navbar-nav li a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .navbar-nav li a:hover {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
+  }
+
+  .cource heading {
+    text-transform: uppercase;
+    font-size: 40px;
+    position: relative;
+    font-family: 'prague', sans-serif;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .cource_para {
+    font-size: 20px;
+    font-family: 'Droid Serif', sans-serif;
+  }
+  .imga {
+      border-radius: 50px;
+  }
+</style>
+<%- include('../header.ejs') %>
+
+
+    <h2 class="text-center">Get All Data Course</h2>
+
+    <div class="container">
+        <table class="table table-bordered table-hover mt-3">
+
+            <tr class="table-dark">
+                <th>S. No.</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Status</th>
+                <th>Comment</th>
+                <th></th>
+                <th>Action</th>
+
+            </tr>
+
+            <% i=1 %>
+            <% d.forEach((item)=>{ %>
+                        <tr class="table-light">
+                            <td>
+                                <%= i++ %>
+                            </td>
+                            <td>
+                                <%= item.name%>
+                            </td>
+                            <td>
+                                <%= item.course%>
+                            </td>
+                            <td>
+                                <%= item.status%>
+                            </td>
+                        
+                                    <td>
+                                        <form action="/update_status/<%= item._id %>" method="post">
+                                            <textarea name="comment"></textarea>
+                                            <input type="hidden" name="name" value="<%= item.name %>">
+                                            <input type="hidden" name="email" value="<%= item.email %>">
+                                    </td>
+                                    <td>
+                                        <button type="submit" name="status" class="btn btn-info"
+                                            value="Approved">Approved</button>
+                                        <button type="submit" name="status" class="btn btn-danger"
+                                            value="Reject">Reject</button>
+
+                                        </form>
+                                    </td>
+                            
+                        
+                            <td>
+                                <a href="/view/<%= item._id %>" class="btn btn-info">View</a>
+                                <a href="/edit/<%= item._id %>" class="btn btn-danger">Edit</a>
+                                <a href="/delete/<%= item._id %>" class="btn btn-danger" hidden>Delete</a>
+                            </td>
+                        </tr>
+
+                        <% }) %>
+                               
+        </table>
+    </div>
+
+    <%- include('../footer.ejs') %>

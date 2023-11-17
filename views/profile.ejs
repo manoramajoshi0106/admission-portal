@@ -1,0 +1,209 @@
+<style>
+  .navbar {
+    background-color: #0005;
+    height: 100px;
+  }
+
+  .navbar-nav li {
+    padding: 0 10px;
+  }
+
+  .navbar-nav li a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .navbar-nav li a:hover {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
+  }
+
+  .cource heading {
+    text-transform: uppercase;
+    font-size: 40px;
+    position: relative;
+    font-family: 'prague', sans-serif;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .cource_para {
+    font-size: 20px;
+    font-family: 'Droid Serif', sans-serif;
+  }
+
+  .imga {
+    border-radius: 50px;
+  }
+
+  /* .btn {
+
+    border-width: 1px;
+    border-color: transparent;
+    text-align: center;
+    margin-left: 120px;
+  } */
+
+  /* .cors {
+    background: #35b9dd !important;
+  }
+
+  .card1:hover {
+    background-color: teal;
+    transform: scale(1.1);
+  }
+
+  .card2:hover {
+    transform: scale(1.1);
+    background-color: yellow;
+  }
+
+  .card3:hover {
+    background-color: goldenrod;
+    transform: scale(1.1);
+  }
+
+  .imga {
+    border-radius: 50px;
+  } */
+</style>
+<%- include('./header.ejs') %>
+
+
+  <!--profile edit-->
+  <section class="vh-100" style="background-color: #eee;">
+    <h1>
+      <marquee>EDIT PROFILE</marquee>
+    </h1>
+
+    <div class="container py-5 h-100 bg-dark">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-12 col-xl-4">
+
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body text-center">
+              <div class="mt-3 mb-4">
+                <img src="<%= img.url %>" class="rounded-circle img-fluid" style="width: 100px; height: 100px;" />
+              </div>
+              <h4 class="mb-2" style="color: cornflowerblue; font-family: Tahoma;"><b>Manorama Joshi</b></h4>
+              <div class="card">
+                <ul>
+                  <li>
+                    <h6>EMAIL: Manorama819@gmail.com</h6>
+                  </li>
+                  <li>
+                    <h6>CONTACT NUMBER: 7867675644</h6>
+                  </li>
+                  <li>
+                    <h6>ADDRESS: Mahaveer Vatika Dabra</h6>
+                  </li>
+                </ul>
+              </div>
+              <form>
+                <div class="form-group">
+                  <a href="" class="btn cors" data-bs-toggle="modal" data-bs-target="#btech">change Password</a>
+                </div>
+                <div class="form-group">
+                  <a href="" class="btn cors" data-bs-toggle="modal" data-bs-target="#update">Update Profile </a>
+                  <% if(msg.length>0){ %>
+                    <div class="alert alert-danger">
+                      <%= msg %>
+                    </div>
+                    <% }%>
+
+                      <% if(msg1.length>0){ %>
+                        <div class="alert alert-success">
+                          <%= msg1 %>
+                        </div>
+                        <% }%>
+                </div>
+
+                <div class="form-group">
+
+                  <a href="" class="btn cors" data-bs-toggle="modal" data-bs-target="#mca">Logout</a>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- change pass Model -->
+  <div class="modal fade" id="btech" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Btech</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/update_password" method="post">
+            <div class="mb-3">
+              <label>Current Password:</label>
+              <input type="password" name="currentpass" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label>New Password:</label>
+              <input type="password" name="npass" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label>Confirm New Password:</label>
+              <input type="password" name="cpass" class="form-control">
+            </div>
+            <button class="btn btn-info" type="submit">Submit</button>
+                     
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- profile model -->
+  <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Btech</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/update_profile" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label>Name:</label>
+              <input type="text" name="name" class="form-control" value="<%= n %>">
+            </div>
+            <div class="mb-3">
+              <label>Email:</label>
+              <input type="email" name="email" class="form-control" value="<%= e %>" readonly>
+            </div>
+            <div class="mb-3">
+              <label>Add a Phone no:</label>
+              <input type="number" name="phone" class="form-control" value="<%= p %>">
+            </div>
+            <div>
+              <label>Update image</label>
+              <input type="file" name="image" class="form-control" required>
+              <img src="<%= img.url %>" width="50px">
+            </div>
+            <button class="btn btn-info" type="submit">Submit</button>
+                     
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <%- include('./footer.ejs') %>

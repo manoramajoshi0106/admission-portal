@@ -1,0 +1,80 @@
+<%- include('./header.ejs') %>
+
+<style>
+  .navbar {
+    background-color: #0005;
+    height: 100px;
+  }
+
+  .navbar-nav li {
+    padding: 0 10px;
+  }
+
+  .navbar-nav li a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .navbar-nav li a:hover {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
+  }
+
+  .cource heading {
+    text-transform: uppercase;
+    font-size: 40px;
+    position: relative;
+    font-family: 'prague', sans-serif;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .cource_para {
+    font-size: 20px;
+    font-family: 'Droid Serif', sans-serif;
+  }
+  .imga {
+      border-radius: 50px;
+  }
+</style>
+
+    <br />
+    <br />
+        <h1 class="text-center">Course display</h1>
+
+    <div class="container">
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Phone</th>
+                <th>status</th>
+                <th>Comment</th>
+                <th>Action</th>
+            </tr>
+            <% d.forEach((item) =>{ %>
+                <!-- console.log(item) -->
+                <tr>
+                    <td><%= item._id %></td>
+                    <td><%= item.name %></td>
+                    <td><%= item.email %></td>
+                    <td><%= item.course %></td>
+                    <td><%= item.phone %></td>
+                    <td><%= item.status %></td>
+                    <td><%= item.comment %></td>
+                    <td>
+                        <a href="/courseview/<%= item._id %>" class="btn btn-primary">view</a>
+                        <a href="/courseedit/<%= item._id %>" class="btn btn-info">edit</a>
+                        <a href="/course_delete/<%= item._id %>" class="btn btn-danger">delete</a>
+                    </td>
+                </tr>
+           <% })%>
+            
+        </table>
+    </div>
+
+<%- include('./footer.ejs') %>
